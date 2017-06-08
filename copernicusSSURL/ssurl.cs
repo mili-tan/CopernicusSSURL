@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Copernicus.SSURL
 {
@@ -11,23 +8,29 @@ namespace Copernicus.SSURL
 
         public static string[] Parse(string ssURL)
         {
-            string urlString = decodeBase64(ssURL.Replace("ss://", ""));
+            string urlString = deCodeBase64(ssURL.Replace("ss://", ""));
             string[] ssArray = urlString.Split(new char[2] {'@', ':'});
             return ssArray;
         }
 
-        private static string decodeBase64(string result)
+        public static string Create(string encryptStr, string passStr, string serverIpStr, int port)
         {
-            string deCode = "";
-            byte[] bytes = Convert.FromBase64String(result);
-            try
-            {
-                deCode = Encoding.UTF8.GetString(bytes);
-            }
-            catch
-            {
-                deCode = result;
-            }
+            string linkStr = string.Format("{0}:{1}@{2}:{3}", encryptStr, passStr, serverIpStr, port.ToString());
+            string ssUrlStr = string.Format("ss://{0}",enCodeBase64(linkStr));
+            return ssUrlStr;
+        }
+
+        private static string enCodeBase64(string sourceStr)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(sourceStr); 
+            string enCode = Convert.ToBase64String(bytes);
+            return enCode;
+        }
+
+        private static string deCodeBase64(string resultStr)
+        {
+            byte[] bytes = Convert.FromBase64String(resultStr);
+            string deCode = Encoding.UTF8.GetString(bytes);
             return deCode;
         }
     }

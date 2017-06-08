@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Copernicus.SSURL;
 
 namespace test
@@ -13,7 +9,8 @@ namespace test
         {
             while (true)
             {
-                Console.WriteLine(string.Join(",", SSURL.Parse(Console.ReadLine())));
+                //Console.WriteLine(string.Join(",", SSURL.Parse(Console.ReadLine())));
+                Console.WriteLine(SSURL.Create("bf-cfb","233","2.33.33.33",2333));
                 Console.ReadLine();
             }
         }
