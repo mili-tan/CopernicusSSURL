@@ -30,6 +30,11 @@ namespace Copernicus.SSURL
             }
             string[] ssArray = urlString.Split(new char[2] {'@', ':'});
 
+            encryptStr = ssArray[0];
+            passStr = ssArray[1];
+            serverIpStr = ssArray[2];
+            port = Convert.ToInt32(ssArray[3]);
+
             return ssArray;
         }
 
