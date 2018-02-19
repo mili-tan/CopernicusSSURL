@@ -18,16 +18,18 @@ namespace Copernicus.SSURL
         public static string[] Parse(string ssURL)
         {
             string urlString;
-            try
+
+            if(!ssURL.Contains("#"))
             {
                 urlString = deCodeBase64(ssURL.Replace("ss://", ""));
             }
-            catch
+            else
             {
-                ssURL = ssURL.Split('#')[1];
-                name = ssURL.Split('#')[0];
+                name = ssURL.Split('#')[1];
+                ssURL = ssURL.Split('#')[0];
                 urlString = deCodeBase64(ssURL.Replace("ss://", ""));
             }
+
             string[] ssArray = urlString.Split(new char[2] {'@', ':'});
 
             encryptStr = ssArray[0];
