@@ -1,15 +1,35 @@
 ﻿using System;
 using System.Text;
+using static Copernicus.SSURL.SSURLTools.SSEntity;
 
 namespace Copernicus.SSURL
 {
-    public class SSURL
+    public class SSURLTools
     {
+        public class SSEntity
+        {
+            public static string name;
+            public static string encryptStr;
+            public static string passStr;
+            public static string serverIpStr;
+            public static int port;
+        }
 
         public static string[] Parse(string ssURL)
         {
-            string urlString = deCodeBase64(ssURL.Replace("ss://", ""));
+            string urlString;
+            try
+            {
+                urlString = deCodeBase64(ssURL.Replace("ss://", ""));
+            }
+            catch
+            {
+                ssURL = ssURL.Split('#')[1];
+                name = ssURL.Split('#')[0];
+                urlString = deCodeBase64(ssURL.Replace("ss://", ""));
+            }
             string[] ssArray = urlString.Split(new char[2] {'@', ':'});
+
             return ssArray;
         }
 
