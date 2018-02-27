@@ -1,2 +1,2 @@
-# CopernicusSSURL
-一个SSURL库
+# mCopernicus.ShadowsocksURL
+一个简单的SSURL库
