@@ -6,38 +6,39 @@ namespace Copernicus.ShadowsocksURi
 {
     public class SSEntity
     {
-        public static string name;
-        public static string encryptStr;
-        public static string passStr;
-        public static string serverIpStr;
-        public static int port;
+        public string name;
+        public string encryptStr;
+        public string passStr;
+        public string serverIpStr;
+        public int port;
     }
 
     public class SSURi
     {
-        public static string[] Parse(string ssURL)
+        public static SSEntity Parse(string ssURL)
         {
             string urlString;
+            SSEntity entity = new SSEntity();
 
-            if(!ssURL.Contains("#"))
+            if (!ssURL.Contains("#"))
             {
                 urlString = deCodeBase64(ssURL.Replace("ss://", ""));
             }
             else
             {
-                name = ssURL.Split('#')[1];
+                entity.name = ssURL.Split('#')[1];
                 ssURL = ssURL.Split('#')[0];
                 urlString = deCodeBase64(ssURL.Replace("ss://", ""));
             }
 
             string[] ssArray = urlString.Split(new char[2] {'@', ':'});
 
-            encryptStr = ssArray[0];
-            passStr = ssArray[1];
-            serverIpStr = ssArray[2];
-            port = Convert.ToInt32(ssArray[3]);
+            entity.encryptStr = ssArray[0];
+            entity.passStr = ssArray[1];
+            entity.serverIpStr = ssArray[2];
+            entity.port = Convert.ToInt32(ssArray[3]);
 
-            return ssArray;
+            return entity;
         }
 
         public static string Create(string encryptStr, string passStr, string serverIpStr, int port)

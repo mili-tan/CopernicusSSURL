@@ -9,8 +9,9 @@ namespace test
         {
             while (true)
             {
-                Console.WriteLine(string.Join(",", SSURi.Parse(Console.ReadLine())));
-                Console.WriteLine(SSEntity.encryptStr);
+                //Console.WriteLine(string.Join(",", SSURi.Parse(Console.ReadLine())));
+                SSEntity sEntity = SSURi.Parse(Console.ReadLine());
+                Console.WriteLine(sEntity.encryptStr);
                 //Console.WriteLine(SSURL.Create("bf-cfb","233","2.33.33.33",2333));
                 Console.ReadLine();
             }
